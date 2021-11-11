@@ -45,12 +45,12 @@ const routes = [
     component: Logout,
   },
   {
-    path: "/postsindex",
+    path: "/posts",
     name: "PostsIndex",
     component: PostsIndex,
   },
   {
-    path: "/postsnew",
+    path: "/posts/new",
     name: "PostsNew",
     component: PostsNew,
   },

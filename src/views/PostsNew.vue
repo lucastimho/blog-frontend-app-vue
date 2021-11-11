@@ -1,7 +1,7 @@
 <template>
   <div class="postsnew">
     <form v-on:submit.prevent="createPost()">
-      <h1>Create Post</h1>
+      <h1>Create a Post</h1>
       <ul>
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
       </ul>
