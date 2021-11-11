@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link>
       |
-      <router-link to="/allblogs">All Blogs</router-link>
+      <router-link to="/blogsIndex">All Blogs</router-link>
       |
       <router-link to="/about">About</router-link>
       |
