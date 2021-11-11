@@ -2,12 +2,18 @@
   <div class="home">
     <h1>{{ message }}</h1>
     <div v-for="post in posts" :key="post.id">
-      <h2>{{ post }}</h2>
+      <h3>{{ post.title }}</h3>
+      <img v-vind:src="post.image" alt="post.title" />
+      <p>{{ post.body }}</p>
     </div>
   </div>
 </template>
 
-<style></style>
+<style>
+img {
+  width: 250px;
+}
+</style>
 
 <script>
 import axios from "axios";
@@ -23,7 +29,7 @@ export default {
   },
   methods: {
     indexPosts: function () {
-      axios.get("http://localhost:3000/posts").then((response) => {
+      axios.get("/posts").then((response) => {
         this.posts = response.data;
         console.log("All posts", this.posts);
       });
