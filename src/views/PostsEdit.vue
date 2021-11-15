@@ -7,18 +7,19 @@
       </ul>
       <div>
         <label>Title:</label>
-        <input type="text" v-model="currentPostParams.title" />
+        <textarea name="input" cols="30" rows="2" v-model="currentPostParams.title"></textarea>
       </div>
       <div>
         <label>Body:</label>
-        <input type="text" v-model="currentPostParams.body" />
+        <textarea name="input" cols="30" rows="6" v-model="currentPostParams.body"></textarea>
       </div>
       <div>
         <label>Image:</label>
-        <input type="text" v-model="currentPostParams.image" />
+        <textarea name="input" cols="30" rows="2" v-model="currentPostParams.image"></textarea>
       </div>
       <input type="submit" value="Submit" />
     </form>
+    <button v-on:click="deletePost()">Delete</button>
   </div>
 </template>
 
@@ -46,6 +47,12 @@ export default {
           this.$router.push(`/posts/${response.data.id}`);
         })
         .catch((error) => console.log(error.response));
+    },
+    deletePost: function () {
+      axios.delete(`/posts/${this.$route.params.id}`).then((response) => {
+        console.log(response.data);
+        this.$router.push("/posts");
+      });
     },
   },
 };
