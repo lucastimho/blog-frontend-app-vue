@@ -1,7 +1,21 @@
 <template>
   <div class="PostsIndex">
     <h1>List of All Posts</h1>
-    <div
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card" v-for="post in posts" :key="post.id">
+          <span>
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <img :src="post.image" alt="post.title" />
+              <p class="card-text">{{ post.body }}</p>
+              <router-link v-bind:to="`/posts/${post.id}`" class="btn btn-primary">Read More</router-link>
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- <div
       v-for="post in posts"
       v-on:click="currentPost = post"
       v-bind:class="{ selected: post === currentPost }"
@@ -12,7 +26,7 @@
         <img :src="post.image" :alt="post.title" />
       </router-link>
       <p>{{ post.body }}</p>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -20,7 +34,12 @@
 img {
   width: 250px;
 }
-.selected {
+/* .selected {
+  color: white;
+  background-color: lightskyblue;
+  transition: background-color 1s ease;
+} */
+span:hover {
   color: white;
   background-color: lightskyblue;
   transition: background-color 1s ease;
