@@ -7,15 +7,18 @@
       </ul>
       <div>
         <label>Title:</label>
-        <input type="text" v-model="newPostParams.title" />
+        <textarea name="input" cols="30" rows="2" v-model="newPostParams.title"></textarea>
+        <small>{{ 100 - newPostParams.title.length }} characters remaining</small>
       </div>
       <div>
         <label>Body:</label>
-        <input type="text" v-model="newPostParams.body" />
+        <textarea name="input" cols="30" rows="5" v-model="newPostParams.body"></textarea>
+        <small>{{ 240 - newPostParams.body.length }} characters remaining</small>
       </div>
       <div>
         <label>Image:</label>
-        <input type="text" v-model="newPostParams.image" />
+        <textarea name="input" cols="30" rows="2" v-model="newPostParams.image"></textarea>
+        <small v-if="newPostParams.image.length === 0" class="text-danger">This post has no image</small>
       </div>
       <input type="submit" value="Submit" />
     </form>
@@ -28,7 +31,7 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      newPostParams: {},
+      newPostParams: { title: "", body: "", image: "" },
       errors: [],
     };
   },
