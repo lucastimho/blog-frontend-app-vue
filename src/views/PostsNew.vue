@@ -1,5 +1,6 @@
 <template>
   <div class="postsnew">
+    <img v-if="status" :src="`https://http.cat/${status}`" alt="" />
     <form v-on:submit.prevent="createPost()">
       <h1>Create a Post</h1>
       <ul>
@@ -33,6 +34,7 @@ export default {
     return {
       newPostParams: { title: "", body: "", image: "" },
       errors: [],
+      status: "",
     };
   },
   methods: {
@@ -43,6 +45,7 @@ export default {
           this.$router.push("/posts");
         })
         .catch((error) => {
+          this.status = error.response.status;
           console.log(error.response);
         });
     },
