@@ -1,7 +1,12 @@
 <template>
   <div class="PostsIndex">
     <h1>List of All Posts</h1>
-    <div v-for="post in posts" :key="post.id">
+    <div
+      v-for="post in posts"
+      v-on:click="currentPost = post"
+      v-bind:class="{ selected: post === currentPost }"
+      :key="post.id"
+    >
       <h3>{{ post.title }}</h3>
       <router-link v-bind:to="`/posts/${post.id}`">
         <img :src="post.image" :alt="post.title" />
@@ -15,6 +20,11 @@
 img {
   width: 250px;
 }
+.selected {
+  color: white;
+  background-color: lightskyblue;
+  transition: background-color 1s ease;
+}
 </style>
 
 <script>
@@ -23,6 +33,7 @@ export default {
   data: function () {
     return {
       posts: [],
+      currentPost: {},
     };
   },
   created: function () {
