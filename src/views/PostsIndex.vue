@@ -1,19 +1,28 @@
 <template>
   <div class="PostsIndex">
+    <div>
+      Search by Title:
+      <input type="text" v-model="titleFilter" list="titles" />
+      <datalist id="titles">
+        <option v-for="post in posts" :key="post.id">{{ post.title }}</option>
+      </datalist>
+    </div>
     <h1>List of All Posts</h1>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card" v-for="post in posts" :key="post.id">
-          <span>
-            <div class="card-body">
-              <h5 class="card-title">{{ post.title }}</h5>
-              <img :src="post.image" alt="post.title" />
-              <p class="card-text">{{ post.body }}</p>
-              <p class="card-text">Created: {{ relativeDate(post.created_at) }}</p>
-              <p class="card-text">Updated: {{ relativeDate(post.updated_at) }}</p>
-              <router-link v-bind:to="`/posts/${post.id}`" class="btn btn-primary">Read More</router-link>
-            </div>
-          </span>
+    <div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card" v-for="post in filterBy(posts, titleFilter, 'title', 'body')" :key="post.id">
+            <span>
+              <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <img :src="post.image" alt="post.title" />
+                <p class="card-text">{{ post.body }}</p>
+                <p class="card-text">Created: {{ relativeDate(post.created_at) }}</p>
+                <p class="card-text">Updated: {{ relativeDate(post.updated_at) }}</p>
+                <router-link v-bind:to="`/posts/${post.id}`" class="btn btn-primary">Read More</router-link>
+              </div>
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -51,11 +60,14 @@ span:hover {
 <script>
 import axios from "axios";
 import moment from "moment";
+import Vue2Filters from "vue2-filters";
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function () {
     return {
       posts: [],
       currentPost: {},
+      titleFilter: "",
     };
   },
   created: function () {
