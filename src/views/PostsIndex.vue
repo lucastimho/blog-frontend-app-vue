@@ -9,6 +9,8 @@
               <h5 class="card-title">{{ post.title }}</h5>
               <img :src="post.image" alt="post.title" />
               <p class="card-text">{{ post.body }}</p>
+              <p class="card-text">Created: {{ relativeDate(post.created_at) }}</p>
+              <p class="card-text">Updated: {{ relativeDate(post.updated_at) }}</p>
               <router-link v-bind:to="`/posts/${post.id}`" class="btn btn-primary">Read More</router-link>
             </div>
           </span>
@@ -48,6 +50,7 @@ span:hover {
 
 <script>
 import axios from "axios";
+import moment from "moment";
 export default {
   data: function () {
     return {
@@ -64,6 +67,9 @@ export default {
         this.posts = response.data;
         console.log("All posts", this.posts);
       });
+    },
+    relativeDate: function (date) {
+      return moment(date).fromNow();
     },
   },
 };
