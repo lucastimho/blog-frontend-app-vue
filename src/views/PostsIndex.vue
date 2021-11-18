@@ -7,11 +7,19 @@
         <option v-for="post in posts" :key="post.id">{{ post.title }}</option>
       </datalist>
     </div>
+    <div>
+      <button v-on:click="setSortAttribute('title')">Sort by Title</button>
+      <button v-on:click="setSortAttribute('body')">Sort by Body Text</button>
+    </div>
     <h1>List of All Posts</h1>
     <div>
       <div class="row">
         <div class="col-sm-6">
-          <div class="card" v-for="post in filterBy(posts, titleFilter, 'title', 'body')" :key="post.id">
+          <div
+            class="card"
+            v-for="post in orderBy(filterBy(posts, titleFilter, 'title', 'body'), sortAttribute)"
+            :key="post.id"
+          >
             <span>
               <div class="card-body">
                 <h5 class="card-title">{{ post.title }}</h5>
@@ -68,6 +76,7 @@ export default {
       posts: [],
       currentPost: {},
       titleFilter: "",
+      sortAttribute: "title",
     };
   },
   created: function () {
@@ -82,6 +91,9 @@ export default {
     },
     relativeDate: function (date) {
       return moment(date).fromNow();
+    },
+    setSortAttribute: function (inputAttribute) {
+      this.sortAttribute = inputAttribute;
     },
   },
 };
