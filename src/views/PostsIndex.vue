@@ -76,7 +76,7 @@ export default {
       posts: [],
       currentPost: {},
       titleFilter: "",
-      sortAttribute: "title",
+      sortAttribute: "",
     };
   },
   created: function () {
